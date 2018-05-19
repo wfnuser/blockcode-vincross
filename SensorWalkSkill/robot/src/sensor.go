@@ -46,3 +46,7 @@ func (d *Hexa) isBright() bool {
 		return false
 	}
 }
+
+func (d *Hexa) isBlocked() bool {
+	return d.distance() < DISTANCE_TO_REACTION
+}
