@@ -70,7 +70,7 @@ h1 {
 
 .block {
     padding: 5px;
-    margin: 10px;
+    margin: 10px 5px 10px 5px;
     cursor: move;
 }
 
@@ -91,7 +91,7 @@ h1 {
 }
 
 .script .block {
-    margin: 5px;
+    margin: 10px 5px 10px 5px;
     background-color: DodgerBlue;
 }
 

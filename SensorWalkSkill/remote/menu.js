@@ -35,9 +35,9 @@
         var elem = evt.target;
         if (!matches(elem, '.script .block')) return;
         if (elem.dataset.name === 'Define block') return;
-        elem.classList.add('running');
+        // elem.classList.add('running');
         scriptRegistry[elem.dataset.name](elem);
-        elem.classList.remove('running');
+        // elem.classList.remove('running');
     }
 
     function repeat(block) {
