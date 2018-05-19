@@ -1,16 +1,18 @@
 package cmdparser
 
 import (
+	"mind/core/framework/log"
+
 	simple "github.com/bitly/go-simplejson"
 )
 
 func Parse(b []byte) error {
 	js, err := simple.NewJson(b)
+	log.Debug.Println("Parse")
 	if err != nil {
 		return err
 	}
-	ParseJson(js)
-	return nil
+	return ParseJson(js)
 }
 
 func ParseJson(js *simple.Json) error {

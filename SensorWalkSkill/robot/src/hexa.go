@@ -11,7 +11,6 @@ package Hexa
 import (
 	"math"
 	"os"
-	"time"
 	// "time"
 
 	"cmdparser"
@@ -133,7 +132,8 @@ func (d *Hexa) OnDisconnect() {
 
 func (d *Hexa) OnRecvString(data string) {
 	b := []byte(data)
-	cmdparser.Parse(b)
+	err := cmdparser.Parse(b)
+	log.Debug.Println(err)
 	// switch data {
 	// case "start":
 	// 	// d.dir <- true
@@ -143,10 +143,10 @@ func (d *Hexa) OnRecvString(data string) {
 	// 	hexabody.StopWalkingContinuously()
 	// 	hexabody.Relax()
 	// }
-	for {
-		// log.Debug.Println(d.distance())
-		log.Debug.Println(d.getAverageRGB())
-		time.Sleep(SENSE_INTERVAL * time.Millisecond)
-	}
+	// for {
+	// 	// log.Debug.Println(d.distance())
+	// 	log.Debug.Println(d.getAverageRGB())
+	// 	time.Sleep(SENSE_INTERVAL * time.Millisecond)
+	// }
 	log.Debug.Println(data)
 }

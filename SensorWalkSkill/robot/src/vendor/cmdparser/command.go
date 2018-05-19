@@ -16,15 +16,21 @@ func (c *Command) Repeat(paras []int, content *simple.Json) {
 }
 
 func (c *Command) Left(paras []int, content *simple.Json) {
-	log.Debug.Printf("Left: %d", paras[0])
+	log.Debug.Println("Left")
+	log.Debug.Println(paras[0])
+	// log.Debug.Print("Left: %d", paras[0])
 }
 
 func (c *Command) Right(paras []int, content *simple.Json) {
-	log.Debug.Printf("Right: %d", paras[0])
+	log.Debug.Println("Right")
+	log.Debug.Println(paras[0])
+	// log.Debug.Printf("Right: %d", paras[0])
 }
 
 func (c *Command) Forward(paras []int, content *simple.Json) {
-	log.Debug.Printf("Forward: %d", paras[0])
+	log.Debug.Println("Forward")
+	log.Debug.Println(paras[0])
+	// log.Debug.Printf("Forward: %d", paras[0])
 }
 
 func (c *Command) Send(methodName string, args ...interface{}) interface{} {
