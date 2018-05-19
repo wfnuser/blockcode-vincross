@@ -46,6 +46,9 @@
         if (cmd.cmd.indexOf('>') !== -1) {
             cmd.cmd = cmd.cmd.split(' ')[0] + 'L'
         }
+        if (cmd.cmd.indexOf('<') !== -1) {
+            cmd.cmd = cmd.cmd.split(' ')[0] + 'S'
+        }
         cmd.params = [];
         cmd.contents = [];
         var value = blockValue(block);

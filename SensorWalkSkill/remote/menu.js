@@ -58,6 +58,14 @@
     }
     menuItem('Distance >', distanceL, "250", [])
 
+    function lightS() {
+    }
+    menuItem('Light <', lightS, "150", [])
+
+    function distanceS() {
+    }
+    menuItem('Distance <', distanceS, "250", [])
+
     function menuItem(name, fn, value, units) {
         var item = Block.create(name, value, units);
         scriptRegistry[name] = fn;

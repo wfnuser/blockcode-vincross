@@ -47,6 +47,20 @@ func (d *Hexa) DistanceL(paras []int, content *simple.Json) {
 	}
 }
 
+func (d *Hexa) LightS(paras []int, content *simple.Json) {
+	log.Debug.Println("LightS")
+	if d.lightS(float64(paras[0])) {
+		d.ParseJson(content)
+	}
+}
+
+func (d *Hexa) DistanceS(paras []int, content *simple.Json) {
+	log.Debug.Println("DistanceS")
+	if d.distanceS(float64(paras[0])) {
+		d.ParseJson(content)
+	}
+}
+
 func (d *Hexa) SelectGait(paras []int, content *simple.Json) {
 	log.Debug.Println("Gait")
 	d.ChangeGait(paras[0])

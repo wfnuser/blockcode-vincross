@@ -54,3 +54,11 @@ func (d *Hexa) isBlocked() bool {
 func (d *Hexa) distanceL(distance float64) bool {
 	return d.distance() > distance
 }
+
+func (d *Hexa) distanceS(distance float64) bool {
+	return d.distance() < distance
+}
+
+func (d *Hexa) lightS(light float64) bool {
+	return d.getAverageRGB() < light
+}

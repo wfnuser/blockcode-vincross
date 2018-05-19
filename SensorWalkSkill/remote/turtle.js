@@ -6,30 +6,29 @@
     'use strict';
 
     var PIXEL_RATIO = window.devicePixelRatio || 1;
-    var canvasPlaceholder = document.querySelector('.canvas-placeholder');
-    var canvas = document.querySelector('.canvas');
+    // var canvasPlaceholder = document.querySelector('.canvas-placeholder');
+    // var canvas = document.querySelector('.canvas');
     var script = document.querySelector('.script');
-    var ctx = canvas.getContext('2d');
+    // var ctx = canvas.getContext('2d');
     var cos = Math.cos, sin = Math.sin, sqrt = Math.sqrt, PI = Math.PI;
     var DEGREE = PI / 180;
     var WIDTH, HEIGHT, position, direction, visible, pen, color;
 
-    function onResize(evt){
-        WIDTH = canvasPlaceholder.getBoundingClientRect().width * PIXEL_RATIO;
-        HEIGHT = canvasPlaceholder.getBoundingClientRect().height * PIXEL_RATIO;
-        canvas.setAttribute('width', WIDTH);
-        canvas.setAttribute('height', HEIGHT);
-        canvas.style.top = canvasPlaceholder.getBoundingClientRect().top + "px";
-        canvas.style.left = canvasPlaceholder.getBoundingClientRect().left + "px";
-        canvas.style.width = (WIDTH / PIXEL_RATIO) + "px"
-        canvas.style.height = (HEIGHT / PIXEL_RATIO) + "px"
-        if (evt){
-            Menu.runSoon();
-        }
-    }
+    // function onResize(evt){
+    //     WIDTH = canvasPlaceholder.getBoundingClientRect().width * PIXEL_RATIO;
+    //     HEIGHT = canvasPlaceholder.getBoundingClientRect().height * PIXEL_RATIO;
+    //     canvas.setAttribute('width', WIDTH);
+    //     canvas.setAttribute('height', HEIGHT);
+    //     canvas.style.top = canvasPlaceholder.getBoundingClientRect().top + "px";
+    //     canvas.style.left = canvasPlaceholder.getBoundingClientRect().left + "px";
+    //     canvas.style.width = (WIDTH / PIXEL_RATIO) + "px"
+    //     canvas.style.height = (HEIGHT / PIXEL_RATIO) + "px"
+    //     if (evt){
+    //         Menu.runSoon();
+    //     }
+    // }
 
     function reset(){
-        recenter();
         direction = deg2rad(90); // facing "up"
         visible = true;
         pen = true; // when pen is true we draw, otherwise we move without drawing
@@ -88,15 +87,10 @@
     function selectGait() {}
 
     function clear(){
-        ctx.save();
-        ctx.fillStyle = 'white';
-        ctx.fillRect(0,0,WIDTH,HEIGHT);
-        ctx.restore();
         reset();
-        ctx.moveTo(position.x, position.y);
     }
 
-    onResize();
+    // onResize();
     clear();
 
     Menu.item('Left', left, 5, 'degrees');
@@ -108,6 +102,5 @@
     // Menu.item('Hide turtle', hideTurtle);
     
     script.addEventListener('beforeRun', clear, false); // always clear canvas first
-    window.addEventListener('resize', onResize, false);
 
 })(window);
