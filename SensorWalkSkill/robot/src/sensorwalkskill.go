@@ -65,17 +65,6 @@ func (d *SensorWalkSkill) walk() {
 	time.Sleep(SENSE_INTERVAL * time.Millisecond)
 	hexabody.StopWalkingContinuously()
 	return
-	// for {
-	// 	select {
-	// 	case <-d.stop:
-	// 		return
-	// 	default:
-	// 		if d.shouldChangeDirection() {
-	// 			d.changeDirection()
-	// 		}
-	// 		time.Sleep(SENSE_INTERVAL * time.Millisecond)
-	// 	}
-	// }
 }
 
 func (d *SensorWalkSkill) OnStart() {
