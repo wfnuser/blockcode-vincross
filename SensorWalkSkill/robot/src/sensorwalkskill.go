@@ -104,12 +104,14 @@ func (d *SensorWalkSkill) OnDisconnect() {
 }
 
 func (d *SensorWalkSkill) OnRecvString(data string) {
-	switch data {
-	case "start":
-		go d.walk()
-	case "stop":
-		d.stop <- true
-		hexabody.StopWalkingContinuously()
-		hexabody.Relax()
-	}
+	// switch data {
+	// case "start":
+	// 	go d.walk()
+	// case "stop":
+	// 	d.stop <- true
+	// 	hexabody.StopWalkingContinuously()
+	// 	hexabody.Relax()
+	// }
+	log.Debug.Println(data)
+
 }

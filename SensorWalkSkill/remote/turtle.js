@@ -78,8 +78,6 @@
 
     function penUp(){ pen = false; }
     function penDown(){ pen = true; }
-    // function hideTurtle(){ visible = false; }
-    // function showTurtle(){ visible = true; }
     function forward(block){ _moveForward(Block.value(block)); }
     function circle(block){ drawCircle(Block.value(block)); }
     function _turn(degrees){ direction += deg2rad(degrees); }

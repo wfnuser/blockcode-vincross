@@ -5,6 +5,7 @@
         "forward",
         "bark",
         "left",
-        "right"
+        "right",
+        "circle"
     ]
 }

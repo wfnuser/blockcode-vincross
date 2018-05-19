@@ -1,31 +1,123 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>SensorWalkSkill</title>
-		<script type="text/javascript" src="mind-framework.js"></script>
-		<script type="text/javascript">
-			mind.init({callback: function(robot) {
-				skillID="SensorWalkSkill";
-				robot.connectSkill({
-					skillID: skillID
-				});
-				document.getElementById("start").onclick = function() {
-					robot.sendData({
-						skillID: skillID, 
-						data: "start"
-					})
-				}
-				document.getElementById("stop").onclick = function() {
-					robot.sendData({
-						skillID: skillID, 
-						data: "stop"
-					})
-				}
-			}});
-		</script>
-	</head>
-	<body>
-		<button id="start">Start</button>
-		<button id="stop">Stop</button>
-	</body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Block Code</title>
+    <link href="block.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Block Code</h1>
+    <div class="menu-column">
+        <h2>Menu</h2>
+        <div class="menu"></div>
+    </div>
+    <div class="script-column">
+        <h2>Script
+            <button class="clear-action">Clear</button>
+            <button class="run-action" id="run-action">Run</button>
+        </h2>
+        <div class="script"></div>
+    </div>
+
+    <div class="canvas-column">
+        <div class="canvas-placeholder"></div>
+        <canvas class="canvas"></canvas>
+    </div>
+</body>
+
+<script src="util.js" type="text/javascript"></script>
+<script src="drag.js" type="text/javascript"></script>
+<!-- <script src="file.js" type="text/javascript"></script> -->
+<script src="block.js" type="text/javascript"></script>
+<script src="menu.js" type="text/javascript"></script>
+<script src="turtle.js" type="text/javascript"></script>
+<script type="text/javascript" src="mind-framework.js"></script>
+<script type="text/javascript">
+    var scriptElem = document.querySelector('.script');
+    var title = '__' + document.querySelector('title').textContent.toLowerCase().replace(' ', '_');
+
+    function saveLocal() {
+        var script = scriptToJson();
+        if (script) {
+            localStorage[title] = script;
+        } else {
+            delete localStorage[title];
+        }
+    }
+
+    function scriptToJson() {
+        var blocks = [].slice.call(document.querySelectorAll('.script > .block'));
+        console.log(blocks)
+        return blocks.length ? JSON.stringify(blocks.map(Block.script)) : null;
+    }
+
+    function jsonToScript(json) {
+        clearScript();
+        JSON.parse(json).forEach(function (block) {
+            scriptElem.appendChild(Block.create.apply(null, block));
+        });
+        Menu.runSoon();
+    }
+
+    function restoreLocal() { jsonToScript(localStorage[title] || '[]'); }
+
+    function clearScript() {
+        [].slice.call(document.querySelectorAll('.script > .block')).forEach(function (block) {
+            block.parentElement.removeChild(block);
+        });
+        Menu.runSoon();
+    }
+
+    function runRobot(evt) {
+        console.log(scriptToJson())
+    }
+
+    function readFile(file) {
+        var fileName = file.name;
+        if (fileName.indexOf('.json', fileName.length - 5) === -1) {
+            return alert('Not a JSON file');
+        }
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function (evt) { jsonToScript(evt.target.result); };
+    }
+
+    function loadFile() {
+        var input = elem('input', { 'type': 'file', 'accept': 'application/json' });
+        if (!input) { return; }
+        input.addEventListener('change', function (evt) { readFile(input.files[0]); });
+        input.click();
+    }
+
+    function loadExample(evt) {
+        var exampleName = evt.target.value;
+        if (exampleName === '') { return; }
+        clearScript();
+        file.examples[exampleName].forEach(function (block) {
+            scriptElem.appendChild(Block.create.apply(null, block));
+        });
+        Menu.runSoon();
+    }
+    
+    mind.init({
+        callback: function (robot) {
+            skillID = "SensorWalkSkill";
+            robot.connectSkill({
+                skillID: skillID
+            });
+            document.getElementById("run-action").onclick = function () {
+                console.log(scriptToJson())
+                robot.sendData({
+                    skillID: skillID,
+                    // data: "start",
+                    data: JSON.stringify(scriptToJson()),
+                })
+            }
+        }
+    });
+
+</script>
+
 </html>

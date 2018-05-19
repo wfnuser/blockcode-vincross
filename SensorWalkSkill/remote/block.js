@@ -69,9 +69,6 @@
         run: runBlocks,
         trigger: trigger
     };
-
-    window.addEventListener('unload', file.saveLocal, false);
-    window.addEventListener('load', file.restoreLocal, false);
 })(window);
 
 
