@@ -1,11 +1,14 @@
 {
     "labels": [
-        "if",
-        "repeat",
-        "forward",
-        "bark",
-        "left",
-        "right",
-        "circle"
+        "If",
+        "Repeat",
+        "Forward",
+        "Bark",
+        "Left",
+        "Right",
+        "Circle",
+        "isRed",
+        "isBright",
+        "Dance"
     ]
 }
