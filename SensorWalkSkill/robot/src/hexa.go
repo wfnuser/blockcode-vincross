@@ -11,7 +11,6 @@ package Hexa
 import (
 	"math"
 	"os"
-	"time"
 	// "time"
 
 	"mind/core/framework/drivers/distance"
@@ -140,10 +139,10 @@ func (d *Hexa) OnRecvString(data string) {
 	// 	hexabody.StopWalkingContinuously()
 	// 	hexabody.Relax()
 	// }
-	for {
-		// log.Debug.Println(d.distance())
-		log.Debug.Println(d.getAverageRGB())
-		time.Sleep(SENSE_INTERVAL * time.Millisecond)
-	}
+	// for {
+	// 	// log.Debug.Println(d.distance())
+	// 	log.Debug.Println(d.getAverageRGB())
+	// 	time.Sleep(SENSE_INTERVAL * time.Millisecond)
+	// }
 	log.Debug.Println(data)
 }
