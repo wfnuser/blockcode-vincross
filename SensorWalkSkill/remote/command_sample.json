@@ -1,0 +1,16 @@
+[
+    {
+        "cmd": "Repeat",
+        "para": [10],
+        "content": [
+            {
+                "cmd": "Right",
+                "para": 10
+            },
+            {
+                "cmd": "Forward",
+                "para": 10
+            }
+        ]
+    }
+]
