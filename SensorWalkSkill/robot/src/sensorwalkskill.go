@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 
+	"cmdparser"
 	"mind/core/framework/drivers/distance"
 	"mind/core/framework/drivers/hexabody"
 	"mind/core/framework/log"
@@ -104,6 +105,8 @@ func (d *SensorWalkSkill) OnDisconnect() {
 }
 
 func (d *SensorWalkSkill) OnRecvString(data string) {
+	b := []byte(data)
+	cmdparser.Parse(b)
 	// switch data {
 	// case "start":
 	// 	go d.walk()
@@ -113,5 +116,4 @@ func (d *SensorWalkSkill) OnRecvString(data string) {
 	// 	hexabody.Relax()
 	// }
 	log.Debug.Println(data)
-
 }
