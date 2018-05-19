@@ -1,8 +1,8 @@
 [
     {
         "cmd": "Repeat",
-        "para": [10],
-        "content": [
+        "params": [10],
+        "contents": [
             {
                 "cmd": "Right",
                 "para": 10

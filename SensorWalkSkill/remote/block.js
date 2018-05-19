@@ -37,19 +37,20 @@
     }
 
     function blockScript(block) {
-        var script = [block.dataset.name];
+        var script = [];
+        var cmd = {};
+        cmd.cmd = block.dataset.name;
+        cmd.params = [];
+        cmd.contents = [];
         var value = blockValue(block);
         if (value !== null) {
-            script.push(blockValue(block));
+            cmd.params.push(value);
         }
         var contents = blockContents(block);
-        var unit = blockUnits(block);
         if (contents) {
-            script.push(contents.map(blockScript));
+            cmd.contents.push(contents.map(blockScript));
         }
-        if (unit) {
-            script.push(unit);
-        }
+        script.push(cmd)
         return script.filter(function (notNull) {
             return notNull !== null;
         });
