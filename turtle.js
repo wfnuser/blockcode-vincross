@@ -38,21 +38,6 @@
 
     function deg2rad(degrees){ return DEGREE * degrees; }
 
-    function drawTurtle(){
-        var userPen = pen; // save pen state
-        if (visible){
-            penUp(); _moveForward(5); penDown();
-            _turn(-150); _moveForward(12);
-            _turn(-120); _moveForward(12);
-            _turn(-120); _moveForward(12);
-            _turn(30);
-            penUp(); _moveForward(-5);
-            if (userPen){
-                penDown(); // restore pen state
-            }
-        }
-    }
-
     function drawCircle(radius){
         // Math for this is from http://www.mathopenref.com/polygonradius.html
         var userPen = pen; // save pen state
@@ -93,10 +78,9 @@
 
     function penUp(){ pen = false; }
     function penDown(){ pen = true; }
-    function hideTurtle(){ visible = false; }
-    function showTurtle(){ visible = true; }
+    // function hideTurtle(){ visible = false; }
+    // function showTurtle(){ visible = true; }
     function forward(block){ _moveForward(Block.value(block)); }
-    function back(block){ _moveForward(-Block.value(block)); }
     function circle(block){ drawCircle(Block.value(block)); }
     function _turn(degrees){ direction += deg2rad(degrees); }
     function left(block){ _turn(Block.value(block)); }
@@ -114,21 +98,14 @@
 
     onResize();
     clear();
-    drawTurtle();
 
     Menu.item('Left', left, 5, 'degrees');
     Menu.item('Right', right, 5, 'degrees');
     Menu.item('Forward', forward, 10, 'steps');
-    Menu.item('Back', back, 10, 'steps');
     Menu.item('Circle', circle, 20, 'radius');
-    Menu.item('Pen up', penUp);
-    Menu.item('Pen down', penDown);
-    Menu.item('Back to center', recenter);
-    Menu.item('Hide turtle', hideTurtle);
-    Menu.item('Show turtle', showTurtle);
-
+    // Menu.item('Hide turtle', hideTurtle);
+    
     script.addEventListener('beforeRun', clear, false); // always clear canvas first
-    script.addEventListener('afterRun', drawTurtle, false); // show turtle if visible
     window.addEventListener('resize', onResize, false);
 
 })(window);

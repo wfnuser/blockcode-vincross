@@ -2,79 +2,79 @@
  * Created by zouxuan on 4/27/17.
  */
 
-(function(global){
+(function (global) {
     'use strict';
 
     var scriptElem = document.querySelector('.script');
     var title = '__' + document.querySelector('title').textContent.toLowerCase().replace(' ', '_');
 
-    function saveLocal(){
+    function saveLocal() {
         var script = scriptToJson();
-        if (script){
+        if (script) {
             localStorage[title] = script;
-        }else{
+        } else {
             delete localStorage[title];
         }
     }
 
-    function scriptToJson(){
+    function scriptToJson() {
         var blocks = [].slice.call(document.querySelectorAll('.script > .block'));
         console.log(blocks)
         return blocks.length ? JSON.stringify(blocks.map(Block.script)) : null;
     }
 
-    function jsonToScript(json){
+    function jsonToScript(json) {
         clearScript();
-        JSON.parse(json).forEach(function(block){
+        JSON.parse(json).forEach(function (block) {
             scriptElem.appendChild(Block.create.apply(null, block));
         });
         Menu.runSoon();
     }
 
-    function restoreLocal(){ jsonToScript(localStorage[title] || '[]' ); }
+    function restoreLocal() { jsonToScript(localStorage[title] || '[]'); }
 
-    function clearScript(){
-        [].slice.call(document.querySelectorAll('.script > .block')).forEach(function(block){
+    function clearScript() {
+        [].slice.call(document.querySelectorAll('.script > .block')).forEach(function (block) {
             block.parentElement.removeChild(block);
         });
         Menu.runSoon();
     }
 
-    function saveFile(evt){
+    function saveFile(evt) {
         var title = prompt("Save file as: ");
-        if (!title){ return; }
-        var file = new Blob([scriptToJson()], {type: 'application/json'});
+        if (!title) { return; }
+        var file = new Blob([scriptToJson()], { type: 'application/json' });
         var reader = new FileReader();
         var a = document.createElement('a');
-        reader.onloadend = function(){
-            var a = elem('a', {'href': reader.result, 'download': title + '.json'});
+        reader.onloadend = function () {
+            var a = elem('a', { 'href': reader.result, 'download': title + '.json' });
             a.click();
         };
         reader.readAsDataURL(file);
     }
 
-    function readFile(file){
+    function readFile(file) {
         var fileName = file.name;
         if (fileName.indexOf('.json', fileName.length - 5) === -1) {
             return alert('Not a JSON file');
         }
         var reader = new FileReader();
-        reader.readAsText( file );
-        reader.onload = function (evt){ jsonToScript(evt.target.result); };
+        reader.readAsText(file);
+        reader.onload = function (evt) { jsonToScript(evt.target.result); };
     }
 
-    function loadFile(){
-        var input = elem('input', {'type': 'file', 'accept': 'application/json'});
-        if (!input){ return; }
-        input.addEventListener('change', function(evt){ readFile(input.files[0]); });
+    function loadFile() {
+        var input = elem('input', { 'type': 'file', 'accept': 'application/json' });
+        if (!input) { return; }
+        input.addEventListener('change', function (evt) { readFile(input.files[0]); });
         input.click();
     }
 
-    function loadExample(evt){
+    function loadExample(evt) {
         var exampleName = evt.target.value;
-        if (exampleName === ''){ return; }
+        if (exampleName === '') { return; }
         clearScript();
-        file.examples[exampleName].forEach(function(block){
+        file.examples[exampleName].forEach(function (block) {
             scriptElem.appendChild(Block.create.apply(null, block));
         });
         Menu.runSoon();

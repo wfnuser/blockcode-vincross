@@ -6,11 +6,11 @@
     'use strict'
 
     function createBlock(name, value, content) {
-        var item = elem('div', {'class': 'block', draggable: true, 'data-name': name}, [name]);
+        var item = elem('div', { 'class': 'block', draggable: true, 'data-name': name }, [name]);
         if (value !== undefined && value !== null) {
-            item.appendChild(elem('input', {type: 'number', value: value}));
+            item.appendChild(elem('input', { type: 'number', value: value }));
             if (Array.isArray(content)) {
-                item.appendChild(elem('div', {'class': 'container'}, content.map(function (block) {
+                item.appendChild(elem('div', { 'class': 'container' }, content.map(function (block) {
                     return createBlock.apply(null, block);
                 })));
             }
