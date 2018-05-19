@@ -38,6 +38,7 @@ func newDirection(direction float64) float64 {
 type Hexa struct {
 	skill.Base
 	stop      chan bool
+	isRunnning bool
 	dir       chan bool
 	direction float64
 }
@@ -76,7 +77,26 @@ func (d *Hexa) forward(duration int) {
 		}
 	}
 }
+func (d *Hexa) changeGait(gait hexabody.GaitType) {
+	if d.isRunnning == true {
+		hexabody.StopWalkingContinuously()
+	}
+	hexabody.SelectGait(gait) 
+	// hexabody.WalkContinuously(d.direction(), WALK_SPEED)
+}
 
+func (d *Hexa) ChangeGait(info int) {
+	switch info {
+	case 1:
+		d.changeGait(hexabody.GaitWave)
+	case 2:
+		d.changeGait(hexabody.GaitRipple)
+	case 3:
+		d.changeGait(hexabody.GaitTripod)
+	case 0:
+		d.changeGait(hexabody.GaitOriginal)
+	}
+}
 func (d *Hexa) shouldChangeDirection() bool {
 	return d.distance() < DISTANCE_TO_REACTION
 }

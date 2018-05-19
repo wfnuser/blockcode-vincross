@@ -34,6 +34,11 @@ func (d *Hexa) Dance(paras []int, content *simple.Json) {
 	// log.Debug.Printf("Forward: %d", paras[0])
 }
 
+func (d *Hexa) SelectGait(paras []int, content *simple.Json) {
+	log.Debug.Println("Gait")
+	d.ChangeGait(paras[0])
+}
+
 func (d *Hexa) Send(methodName string, args ...interface{}) interface{} {
 	return metago.CallFunc(d, methodName, args...)
 }
