@@ -49,6 +49,11 @@
     }
     menuItem('Repeat', repeat, 10, []);
 
+
+    function if_block() {
+    }
+    menuItem('If', if_block, "isBright", [])
+
     function menuItem(name, fn, value, units) {
         var item = Block.create(name, value, units);
         scriptRegistry[name] = fn;
