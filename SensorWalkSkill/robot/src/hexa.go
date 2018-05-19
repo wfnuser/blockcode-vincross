@@ -47,14 +47,6 @@ func NewSkill() skill.Interface {
 	}
 }
 
-func (d *Hexa) distance() float64 {
-	distance, err := distance.Value()
-	if err != nil {
-		log.Error.Println(err)
-	}
-	return distance
-}
-
 func (d *Hexa) Left(degree float64, duration int) {
 	if d.direction+degree > 360 {
 		d.direction = d.direction + degree - 360

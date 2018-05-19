@@ -9,6 +9,7 @@
         "Circle",
         "isRed",
         "isBright",
-        "Dance"
+        "Dance",
+        "SelectGait"
     ]
 }
