@@ -4,7 +4,7 @@
 * when encountering obstacles
  */
 
-// 最简单的走路，direction duration 
+// 最简单的走路，direction duration
 
 package Hexa
 
@@ -56,7 +56,7 @@ func (d *Hexa) distance() float64 {
 }
 
 func (d *Hexa) Left(degree float64, duration int) {
-	if d.direction + degree > 360 {
+	if d.direction+degree > 360 {
 		d.direction = d.direction + degree - 360
 	} else {
 		d.direction = d.direction + degree
@@ -65,17 +65,17 @@ func (d *Hexa) Left(degree float64, duration int) {
 }
 
 func (d *Hexa) Right(degree float64, duration int) {
-	if d.direction - degree < 0 {
+	if d.direction-degree < 0 {
 		d.direction = d.direction - degree + 360
 	} else {
-		d.direction = d.direction - degree 
+		d.direction = d.direction - degree
 	}
 	hexabody.MoveHead(d.direction, MOVE_HEAD_DURATION)
 }
 
 // 奇怪，walk好像并不能指定速度
 func (d *Hexa) Forward(duration int) {
-	if (duration == FOREVER) {
+	if duration == FOREVER {
 		hexabody.WalkContinuously(0, MOVE_HEAD_DURATION)
 	} else {
 		hexabody.Walk(d.direction, duration)
@@ -130,13 +130,14 @@ func (d *Hexa) OnDisconnect() {
 }
 
 func (d *Hexa) OnRecvString(data string) {
-	switch data {
-	case "start":
-		// d.dir <- true
-		go d.walk()
-	case "stop":
-		d.stop <- true
-		hexabody.StopWalkingContinuously()
-		hexabody.Relax()
-	}
+	// switch data {
+	// case "start":
+	// 	// d.dir <- true
+	// 	go d.walk()
+	// case "stop":
+	// 	d.stop <- true
+	// 	hexabody.StopWalkingContinuously()
+	// 	hexabody.Relax()
+	// }
+	log.Debug.Println(data)
 }

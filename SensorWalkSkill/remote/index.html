@@ -33,7 +33,7 @@
 <script src="block.js" type="text/javascript"></script>
 <script src="menu.js" type="text/javascript"></script>
 <script src="turtle.js" type="text/javascript"></script>
-<!-- <script type="text/javascript" src="mind-framework.js"></script> -->
+<script type="text/javascript" src="mind-framework.js"></script>
 <script type="text/javascript">
     (function (global) {
         'use strict';
@@ -41,23 +41,23 @@
         document.getElementById("run-action").onclick = function () {
             console.log(global.file.scriptToJson())
         }
-        
-        // mind.init({
-        //     callback: function (robot) {
-        //         var skillID = "SensorWalkSkill";
-        //         robot.connectSkill({
-        //             skillID: skillID
-        //         });
-        //         document.getElementById("run-action").onclick = function () {
-        //             console.log(global.file.scriptToJson())
-        //             robot.sendData({
-        //                 skillID: skillID,
-        //                 // data: "start",
-        //                 data: JSON.stringify(global.file.scriptToJson()),
-        //             })
-        //         }
-        //     }
-        // });
+
+        mind.init({
+            callback: function (robot) {
+                var skillID = "SensorWalkSkill";
+                robot.connectSkill({
+                    skillID: skillID
+                });
+                document.getElementById("run-action").onclick = function () {
+                    console.log(global.file.scriptToJson())
+                    robot.sendData({
+                        skillID: skillID,
+                        // data: "start",
+                        data: JSON.stringify(global.file.scriptToJson()),
+                    })
+                }
+            }
+        });
     })(window);
 
 
