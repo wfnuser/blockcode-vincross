@@ -84,6 +84,7 @@
     function left(block){ _turn(Block.value(block)); }
     function right(block){ _turn(-Block.value(block)); }
     function recenter(){ position = {x: WIDTH/2, y: HEIGHT/2}; }
+    function dance() {}
 
     function clear(){
         ctx.save();
@@ -101,6 +102,7 @@
     Menu.item('Right', right, 5, 'degrees');
     Menu.item('Forward', forward, 10, 'steps');
     Menu.item('Circle', circle, 20, 'radius');
+    Menu.item('Dance', dance, 5, 'seconds')
     // Menu.item('Hide turtle', hideTurtle);
     
     script.addEventListener('beforeRun', clear, false); // always clear canvas first

@@ -5,6 +5,8 @@
 (function (global) {
     'use strict'
 
+    var Conditions = ['isRed', 'isBright']
+
     function createBlock(name, value, content) {
         var item = elem('div', { 'class': 'block', draggable: true, 'data-name': name }, [name]);
         if (value !== undefined && value !== null) {
@@ -31,7 +33,11 @@
 
     function blockValue(block) {
         var input = block.querySelector('input');
-        return input ? Number(input.value) : null;
+        if (input && Conditions.indexOf(input.value) >= 0) {
+            return input.value;
+        } else {
+            return Number(input.value);
+        }
     }
 
     function blockUnits(block) {
@@ -48,7 +54,13 @@
         cmd.contents = [];
         var value = blockValue(block);
         if (value !== null) {
-            cmd.params.push(value);
+            if (cmd.cmd === 'If') {
+                if (Conditions.indexOf(value) >= 0) {
+                    cmd.params.push(Conditions.indexOf(value))
+                }
+            } else {
+                cmd.params.push(value);
+            }
         }
         var contents = blockContents(block);
         if (contents) {

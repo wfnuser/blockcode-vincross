@@ -19,7 +19,6 @@
 
     function scriptToJson() {
         var blocks = [].slice.call(document.querySelectorAll('.script > .block'));
-        console.log(blocks)
         return blocks.length ? JSON.stringify(blocks.map(Block.script)) : null;
     }
 
