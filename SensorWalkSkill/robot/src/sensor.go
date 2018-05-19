@@ -39,8 +39,8 @@ func (d *Hexa) getAverageRGB() float64 {
 	return calculateAvgRGB(img)
 }
 
-func (d *Hexa) isBright() bool {
-	if d.getAverageRGB() > 145.0 {
+func (d *Hexa) lightL(light float64) bool {
+	if d.getAverageRGB() > light {
 		return true
 	} else {
 		return false
@@ -49,4 +49,8 @@ func (d *Hexa) isBright() bool {
 
 func (d *Hexa) isBlocked() bool {
 	return d.distance() < DISTANCE_TO_REACTION
+}
+
+func (d *Hexa) distanceL(distance float64) bool {
+	return d.distance() < distance
 }
