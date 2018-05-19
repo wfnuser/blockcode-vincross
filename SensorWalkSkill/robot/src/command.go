@@ -15,12 +15,12 @@ func (d *Hexa) Repeat(paras []int, content *simple.Json) {
 
 func (d *Hexa) Left(paras []int, content *simple.Json) {
 	log.Debug.Println("Left")
-	d.left(float64(paras[0]), paras[1])
+	d.left(float64(paras[0]))
 }
 
 func (d *Hexa) Right(paras []int, content *simple.Json) {
 	log.Debug.Println("Right")
-	d.right(float64(paras[0]), paras[1])
+	d.right(float64(paras[0]))
 	// log.Debug.Printf("Right: %d", paras[0])
 }
 

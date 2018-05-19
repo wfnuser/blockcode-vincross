@@ -48,7 +48,7 @@ func NewSkill() skill.Interface {
 	}
 }
 
-func (d *Hexa) left(degree float64, duration int) {
+func (d *Hexa) left(degree float64) {
 	if d.direction+degree > 360 {
 		d.direction = d.direction + degree - 360
 	} else {
@@ -57,7 +57,7 @@ func (d *Hexa) left(degree float64, duration int) {
 	hexabody.MoveHead(d.direction, MOVE_HEAD_DURATION)
 }
 
-func (d *Hexa) right(degree float64, duration int) {
+func (d *Hexa) right(degree float64) {
 	if d.direction-degree < 0 {
 		d.direction = d.direction - degree + 360
 	} else {
@@ -92,7 +92,7 @@ func (d *Hexa) walk() {
 			// 	d.changeDirection()
 			// }
 			// time.Sleep(SENSE_INTERVAL * time.Millisecond)
-			d.right(90.0, 1000)
+			// d.right(90.0, 1000)
 		}
 	}
 }
