@@ -40,17 +40,8 @@
         Menu.runSoon();
     }
 
-    function saveFile(evt) {
-        var title = prompt("Save file as: ");
-        if (!title) { return; }
-        var file = new Blob([scriptToJson()], { type: 'application/json' });
-        var reader = new FileReader();
-        var a = document.createElement('a');
-        reader.onloadend = function () {
-            var a = elem('a', { 'href': reader.result, 'download': title + '.json' });
-            a.click();
-        };
-        reader.readAsDataURL(file);
+    function runRobot(evt) {
+        console.log(scriptToJson())
     }
 
     function readFile(file) {
@@ -87,8 +78,6 @@
     };
 
     document.querySelector('.clear-action').addEventListener('click', clearScript, false);
-    document.querySelector('.save-action').addEventListener('click', saveFile, false);
-    document.querySelector('.load-action').addEventListener('click', loadFile, false);
-    document.querySelector('.choose-example').addEventListener('change', loadExample, false);
+    document.querySelector('.run-action').addEventListener('click', runRobot, false);
 
 })(window);
