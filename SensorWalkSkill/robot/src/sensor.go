@@ -38,3 +38,11 @@ func (d *Hexa) getAverageRGB() float64 {
 
 	return calculateAvgRGB(img)
 }
+
+func (d *Hexa) isBright() bool {
+	if d.getAverageRGB() > 145.0 {
+		return true
+	} else {
+		return false
+	}
+}
