@@ -11,10 +11,12 @@ package Hexa
 import (
 	"math"
 	"os"
+	"time"
 	// "time"
 
 	"mind/core/framework/drivers/distance"
 	"mind/core/framework/drivers/hexabody"
+	"mind/core/framework/drivers/media"
 	"mind/core/framework/log"
 	"mind/core/framework/skill"
 )
@@ -110,6 +112,13 @@ func (d *Hexa) OnStart() {
 	if !distance.Available() {
 		log.Error.Println("Distance sensor is not available")
 	}
+	if !media.Available() {
+		log.Error.Println("Media driver not available")
+		return
+	}
+	if err = media.Start(); err != nil {
+		log.Error.Println("Media driver could not start")
+	}
 }
 
 func (d *Hexa) OnClose() {
@@ -131,5 +140,10 @@ func (d *Hexa) OnRecvString(data string) {
 	// 	hexabody.StopWalkingContinuously()
 	// 	hexabody.Relax()
 	// }
+	for {
+		// log.Debug.Println(d.distance())
+		log.Debug.Println(d.getAverageRGB())
+		time.Sleep(SENSE_INTERVAL * time.Millisecond)
+	}
 	log.Debug.Println(data)
 }

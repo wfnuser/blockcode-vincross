@@ -47,7 +47,6 @@
     }
 
     function blockScript(block) {
-        var script = [];
         var cmd = {};
         cmd.cmd = block.dataset.name;
         cmd.params = [];
@@ -64,12 +63,9 @@
         }
         var contents = blockContents(block);
         if (contents) {
-            cmd.contents.push(contents.map(blockScript));
+            cmd.contents = contents.map(blockScript);
         }
-        script.push(cmd)
-        return script.filter(function (notNull) {
-            return notNull !== null;
-        });
+        return cmd;
     }
 
     function runBlocks(block) {
