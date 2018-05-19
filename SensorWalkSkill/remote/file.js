@@ -73,10 +73,11 @@
     global.file = {
         saveLocal: saveLocal,
         restoreLocal: restoreLocal,
+        scriptToJson: scriptToJson,
         examples: {}
     };
 
     document.querySelector('.clear-action').addEventListener('click', clearScript, false);
-    document.querySelector('.run-action').addEventListener('click', runRobot, false);
+    // document.querySelector('.run-action').addEventListener('click', runRobot, false);
 
 })(window);
