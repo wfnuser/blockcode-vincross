@@ -52,5 +52,5 @@ func (d *Hexa) isBlocked() bool {
 }
 
 func (d *Hexa) distanceL(distance float64) bool {
-	return d.distance() < distance
+	return d.distance() > distance
 }

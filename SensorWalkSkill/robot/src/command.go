@@ -29,9 +29,22 @@ func (d *Hexa) Forward(paras []int, content *simple.Json) {
 }
 
 func (d *Hexa) Dance(paras []int, content *simple.Json) {
-	log.Debug.Println("Forward")
+	log.Debug.Println("Dance")
 	d.dance(paras[0])
-	// log.Debug.Printf("Forward: %d", paras[0])
+}
+
+func (d *Hexa) Lightl(paras []int, content *simple.Json) {
+	log.Debug.Println("Lightl")
+	if d.lightL(float64(paras[0])) {
+		d.ParseJson(content)
+	}
+}
+
+func (d *Hexa) DistanceL(paras []int, content *simple.Json) {
+	log.Debug.Println("DistanceL")
+	if d.distanceL(float64(paras[0])) {
+		d.ParseJson(content)
+	}
 }
 
 func (d *Hexa) Send(methodName string, args ...interface{}) interface{} {
