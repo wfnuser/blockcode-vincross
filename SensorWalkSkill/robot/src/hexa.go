@@ -71,7 +71,9 @@ func (d *Hexa) forward(duration int) {
 	if duration == FOREVER {
 		hexabody.WalkContinuously(0, MOVE_HEAD_DURATION)
 	} else {
-		hexabody.Walk(d.direction, duration)
+		for i := 0; i < duration; i = i + 1 {
+			hexabody.Walk(d.direction, 100)
+		}
 	}
 }
 
@@ -130,6 +132,7 @@ func (d *Hexa) OnDisconnect() {
 }
 
 func (d *Hexa) OnRecvString(data string) {
+	d.direction = hexabody.Direction()
 	b := []byte(data)
 	err := d.Parse(b)
 	log.Debug.Println(err)
