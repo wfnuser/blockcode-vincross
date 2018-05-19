@@ -5,8 +5,6 @@
 (function (global) {
     'use strict'
 
-    var Conditions = ['isRed', 'isBright']
-
     function createBlock(name, value, content) {
         var item = elem('div', { 'class': 'block', draggable: true, 'data-name': name }, [name]);
         if (value !== undefined && value !== null) {
@@ -33,11 +31,7 @@
 
     function blockValue(block) {
         var input = block.querySelector('input');
-        if (input && Conditions.indexOf(input.value) >= 0) {
-            return input.value;
-        } else {
-            return Number(input.value);
-        }
+        return Number(input.value);
     }
 
     function blockUnits(block) {
@@ -49,17 +43,14 @@
     function blockScript(block) {
         var cmd = {};
         cmd.cmd = block.dataset.name;
+        if (cmd.cmd.indexOf('>') !== -1) {
+            cmd.cmd = cmd.cmd.split(' ')[0] + 'L'
+        }
         cmd.params = [];
         cmd.contents = [];
         var value = blockValue(block);
         if (value !== null) {
-            if (cmd.cmd === 'If') {
-                if (Conditions.indexOf(value) >= 0) {
-                    cmd.params.push(Conditions.indexOf(value))
-                }
-            } else {
-                cmd.params.push(value);
-            }
+            cmd.params.push(value);
         }
         var contents = blockContents(block);
         if (contents) {

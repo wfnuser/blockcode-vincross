@@ -50,9 +50,13 @@
     menuItem('Repeat', repeat, 10, []);
 
 
-    function if_block() {
+    function lightL() {
     }
-    menuItem('If', if_block, "isBright", [])
+    menuItem('Light >', lightL, "150", [])
+
+    function distanceL() {
+    }
+    menuItem('Distance >', distanceL, "250", [])
 
     function menuItem(name, fn, value, units) {
         var item = Block.create(name, value, units);
