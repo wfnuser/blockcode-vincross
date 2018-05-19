@@ -30,7 +30,7 @@ func (d *Hexa) Forward(paras []int, content *simple.Json) {
 	// log.Debug.Printf("Forward: %d", paras[0])
 }
 
-func (d *Hexa) Forward(paras []int, content *simple.Json) {
+func (d *Hexa) Dance(paras []int, content *simple.Json) {
 	log.Debug.Println("Forward")
 	d.dance(paras[0])
 	// log.Debug.Printf("Forward: %d", paras[0])
