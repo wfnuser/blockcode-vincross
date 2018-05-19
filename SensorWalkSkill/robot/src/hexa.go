@@ -13,7 +13,6 @@ import (
 	"os"
 	// "time"
 
-	"cmdparser"
 	"mind/core/framework/drivers/distance"
 	"mind/core/framework/drivers/hexabody"
 	"mind/core/framework/drivers/media"
@@ -49,7 +48,7 @@ func NewSkill() skill.Interface {
 	}
 }
 
-func (d *Hexa) Left(degree float64, duration int) {
+func (d *Hexa) left(degree float64, duration int) {
 	if d.direction+degree > 360 {
 		d.direction = d.direction + degree - 360
 	} else {
@@ -58,7 +57,7 @@ func (d *Hexa) Left(degree float64, duration int) {
 	hexabody.MoveHead(d.direction, MOVE_HEAD_DURATION)
 }
 
-func (d *Hexa) Right(degree float64, duration int) {
+func (d *Hexa) right(degree float64, duration int) {
 	if d.direction-degree < 0 {
 		d.direction = d.direction - degree + 360
 	} else {
@@ -68,7 +67,7 @@ func (d *Hexa) Right(degree float64, duration int) {
 }
 
 // 奇怪，walk好像并不能指定速度
-func (d *Hexa) Forward(duration int) {
+func (d *Hexa) forward(duration int) {
 	if duration == FOREVER {
 		hexabody.WalkContinuously(0, MOVE_HEAD_DURATION)
 	} else {
@@ -93,7 +92,7 @@ func (d *Hexa) walk() {
 			// 	d.changeDirection()
 			// }
 			// time.Sleep(SENSE_INTERVAL * time.Millisecond)
-			d.Right(90.0, 1000)
+			d.right(90.0, 1000)
 		}
 	}
 }
@@ -132,7 +131,7 @@ func (d *Hexa) OnDisconnect() {
 
 func (d *Hexa) OnRecvString(data string) {
 	b := []byte(data)
-	err := cmdparser.Parse(b)
+	err := d.Parse(b)
 	log.Debug.Println(err)
 	// switch data {
 	// case "start":
