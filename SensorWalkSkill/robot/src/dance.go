@@ -56,7 +56,7 @@ func moveLegs(v float64) {
 func (d *Hexa) dance(time int) {
 	ready()
 	v := 0.0
-	for i := 0; i < 10*time; i++ {
+	for i := 0; i < 8*time; i++ {
 		moveLegs(v)
 		v += 10
 	}
