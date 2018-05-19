@@ -14,6 +14,7 @@ import (
 	"time"
 	// "time"
 
+	"cmdparser"
 	"mind/core/framework/drivers/distance"
 	"mind/core/framework/drivers/hexabody"
 	"mind/core/framework/drivers/media"
@@ -131,6 +132,8 @@ func (d *Hexa) OnDisconnect() {
 }
 
 func (d *Hexa) OnRecvString(data string) {
+	b := []byte(data)
+	cmdparser.Parse(b)
 	// switch data {
 	// case "start":
 	// 	// d.dir <- true
