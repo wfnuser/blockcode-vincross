@@ -36,7 +36,7 @@ func runCmd(cmd string) {
 }
 
 func (d *Hexa) RunCmd(data string, times int) {
-	log.Debug.Println(data)
+	// log.Debug.Println(data)
 	cmds := strings.Split(data, "|")
 	for i := 0; i < times; i = i + 1 {
 		for _, cmd := range cmds {

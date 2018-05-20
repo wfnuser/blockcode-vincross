@@ -9,10 +9,13 @@
 package Hexa
 
 import (
+	"bytes"
+	"encoding/base64"
+	"image/jpeg"
 	"math"
 	"os"
 	// "time"
-
+	"mind/core/framework"
 	"mind/core/framework/drivers/distance"
 	"mind/core/framework/drivers/hexabody"
 	"mind/core/framework/drivers/media"
@@ -37,10 +40,10 @@ func newDirection(direction float64) float64 {
 
 type Hexa struct {
 	skill.Base
-	stop      chan bool
+	stop       chan bool
 	isRunnning bool
-	dir       chan bool
-	direction float64
+	dir        chan bool
+	direction  float64
 }
 
 func NewSkill() skill.Interface {
@@ -81,7 +84,7 @@ func (d *Hexa) changeGait(gait hexabody.GaitType) {
 	if d.isRunnning == true {
 		hexabody.StopWalkingContinuously()
 	}
-	hexabody.SelectGait(gait) 
+	hexabody.SelectGait(gait)
 	// hexabody.WalkContinuously(d.direction(), WALK_SPEED)
 }
 
@@ -97,6 +100,31 @@ func (d *Hexa) ChangeGait(info int) {
 		d.changeGait(hexabody.GaitOriginal)
 	}
 }
+
+func (d *Hexa) circle(info int) {
+	var leg *hexabody.LegPosition
+	if info == 1 {
+		leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)
+	} else {
+		leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)		
+	}
+	for j := 0; j < 20; j++ {
+		for i := 1; i < 6; i++ {
+			hexabody.MoveLeg(i, leg, FAST_DURATION*3)
+		}
+		if (j % 2 == 0) {
+			leg = hexabody.NewLegPosition().SetCoordinates(0, 0, 70.0)
+		} else {
+			if info == 1 {
+				leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)			
+			} else {
+				leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)
+			}
+		}
+
+	}
+}
+
 func (d *Hexa) shouldChangeDirection() bool {
 	return d.distance() < DISTANCE_TO_REACTION
 }
@@ -139,6 +167,25 @@ func (d *Hexa) OnStart() {
 	}
 	if err = media.Start(); err != nil {
 		log.Error.Println("Media driver could not start")
+	}
+}
+
+func (d *Hexa) OnConnect() {
+	err := media.Start()
+	if err != nil {
+		log.Error.Println("Media start err:", err)
+		return
+	}
+	for {
+		log.Info.Println("Connected")
+		buf := new(bytes.Buffer)
+		log.Info.Println("JPEG")
+		jpeg.Encode(buf, media.SnapshotYCbCr(), nil)
+		log.Info.Println("BASE64")
+		str := base64.StdEncoding.EncodeToString(buf.Bytes())
+		log.Info.Println("SENDING")
+		framework.SendString(str)
+		log.Info.Println("Sent:", str[:20], len(str))
 	}
 }
 
