@@ -3,6 +3,7 @@ html, body {
     padding: 0;
     border: 0;
     margin: 0;
+    background-color: rgb(239,240,220);
 }
 
 .menu, .script, .block {
@@ -26,7 +27,6 @@ h1 {
 }
 
 .menu {
-    /*background-color: PeachPuff;*/
     background-color: #F5F6EB;
     overflow-y: auto;
 }
@@ -43,7 +43,7 @@ h1 {
 }
 
 .script {
-    background-color: LightSteelBlue;
+    background-color: rgb(246,246,246);
     height: 94%;
     overflow-y: auto;
 }
@@ -88,13 +88,12 @@ h1 {
 }
 
 .menu .block {
-    /*background-color: Coral;*/
     background-color: #C9CABB;
 }
 
 .script .block {
     margin: 10px 5px 10px 5px;
-    background-color: DodgerBlue;
+    background-color: rgba(109,211,206, 0.8);
 }
 
 .block input {
@@ -113,13 +112,12 @@ h1 {
     border: 1px inset #021429;
     border-radius: 7px;
     border-right: 0;
-    background-color: LightSteelBlue;
+    background-color: rgb(246, 246, 246);
     border-radius: 7px 0 0 7px;
 }
 
 .menu .block-container {
-    /*background-color: PeachPuff;*/
-    background-color: #F5F6EB;
+    background-color: #f8f9ee;
 }
 
 .over .block-container {
