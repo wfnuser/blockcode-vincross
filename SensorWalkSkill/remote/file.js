@@ -25,9 +25,8 @@
     function jsonToScript(json) {
         clearScript();
         JSON.parse(json).forEach(function (block) {
-            scriptElem.appendChild(Block.create.apply(null, block));
+            scriptElem.appendChild(Block.create.apply(null, [block.cmd, block.params[0], block.contents]));
         });
-        Menu.runSoon();
     }
 
     function restoreLocal() { jsonToScript(localStorage[title] || '[]'); }
@@ -70,6 +69,19 @@
         Menu.runSoon();
     }
 
+    function saveFile(evt){
+        var title = prompt("Save file as: ");
+        if (!title){ return; }
+        var file = new Blob([scriptToJson()], {type: 'application/json'});
+        var reader = new FileReader();
+        var a = document.createElement('a');
+        reader.onloadend = function(){
+            var a = elem('a', {'href': reader.result, 'download': title + '.json'});
+            a.click();
+        };
+        reader.readAsDataURL(file);
+    }
+
     global.file = {
         saveLocal: saveLocal,
         restoreLocal: restoreLocal,
@@ -78,6 +90,7 @@
     };
 
     document.querySelector('.clear-action').addEventListener('click', clearScript, false);
-    // document.querySelector('.run-action').addEventListener('click', runRobot, false);
+    document.querySelector('.save-action').addEventListener('click', saveFile, false);
+    document.querySelector('.load-action').addEventListener('click', loadFile, false);
 
 })(window);

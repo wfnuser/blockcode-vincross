@@ -15,7 +15,7 @@
             }
             if (Array.isArray(content)) {
                 item.appendChild(elem('div', { 'class': 'container' }, content.map(function (block) {
-                    return createBlock.apply(null, block);
+                    return createBlock.apply(null, [block.cmd, block.params[0], block.contents]);
                 })));
             }
         } else if (typeof content === 'string') {

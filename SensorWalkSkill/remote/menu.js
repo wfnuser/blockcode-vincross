@@ -20,7 +20,7 @@
             Block.trigger('beforeRun', script);
             var blocks = [].slice.call(
                 document.querySelectorAll('.script > .block'));
-            Block.run(blocks);
+            // Block.run(blocks);
             Block.trigger('afterRun', script);
         }
         else {
