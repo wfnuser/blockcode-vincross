@@ -1,0 +1,1 @@
+[{"cmd":"SelectGait","params":[4],"contents":[]},{"cmd":"Repeat","params":[10],"contents":[{"cmd":"Forward","params":[10],"contents":[]},{"cmd":"DistanceS","params":[250],"contents":[{"cmd":"Right","params":[180],"contents":[]},{"cmd":"Forward","params":[10],"contents":[]}]}]}]
