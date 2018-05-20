@@ -5,6 +5,9 @@
 (function (global) {
     'use strict'
 
+    // TODO: adjust logic here, just work around
+    let hasContainers = ["Repeat", "Light >", "Light <", "Distance >", "Distance <", "LightL", "LightS", "DistanceL", "DistanceS"]
+
     function createBlock(name, value, content) {
         var item = elem('div', { 'class': 'block', draggable: true, 'data-name': name }, [name]);
         if (value !== undefined && value !== null) {
@@ -14,7 +17,7 @@
                 item.appendChild(elem('input', { value: value }));
             }
             if (Array.isArray(content)) {
-                if (content.length > 0) {
+                if (hasContainers.includes(name)) {
                     item.appendChild(elem('div', { 'class': 'block-container' }, content.map(function (block) {
                         return createBlock.apply(null, [block.cmd, block.params[0], block.contents]);
                     })));
