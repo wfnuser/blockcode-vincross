@@ -85,6 +85,8 @@
     function recenter(){ position = {x: WIDTH/2, y: HEIGHT/2}; }
     function dance() {}
     function selectGait() {}
+    function tita() {}
+    function cheers() {}
 
     function clear(){
         reset();
@@ -96,9 +98,11 @@
     Menu.item('Left', left, 5, 'degrees');
     Menu.item('Right', right, 5, 'degrees');
     Menu.item('Forward', forward, 10, 'steps');
-    Menu.item('Circle', circle, 20, 'radius');
+    Menu.item('Circle', circle, 0, 'radius');
     Menu.item('Dance', dance, 5, 'seconds');
-    Menu.item('SelectGait', selectGait, 1, '')
+    Menu.item('SelectGait', selectGait, 1, '');
+    Menu.item('Tita', tita, 1, '');
+    Menu.item('Cheers', cheers, 1, '');
     // Menu.item('Hide turtle', hideTurtle);
     
     script.addEventListener('beforeRun', clear, false); // always clear canvas first

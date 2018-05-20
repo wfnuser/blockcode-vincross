@@ -42,6 +42,18 @@ h1 {
     margin: 0 10px;
 }
 
+.panel-column {
+    width: 45%;
+    float:left;
+    height: 85%;
+}
+
+.panel-column img{
+    width: 100%;
+    float:left;
+}
+
+
 .script {
     background-color: rgb(246,246,246);
     height: 94%;
