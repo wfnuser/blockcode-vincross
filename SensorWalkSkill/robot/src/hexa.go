@@ -100,6 +100,30 @@ func (d *Hexa) ChangeGait(info int) {
 		d.changeGait(hexabody.GaitOriginal)
 	}
 }
+
+func (d *Hexa) circle(info int) {
+	if info == 1 {
+		leg := hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)
+	} else {
+		leg := hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)		
+	}
+	for j := 0; j < 20; j++ {
+		for i := 1; i < 6; i++ {
+			hexabody.MoveLeg(i, leg, FAST_DURATION*3)
+		}
+		if (j % 2 == 0) {
+			leg = hexabody.NewLegPosition().SetCoordinates(0, 0, 70.0)
+		} else {
+			if info == 1 {
+				leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)			
+			} else {
+				leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)
+			}
+		}
+
+	}
+}
+
 func (d *Hexa) shouldChangeDirection() bool {
 	return d.distance() < DISTANCE_TO_REACTION
 }

@@ -66,6 +66,11 @@ func (d *Hexa) SelectGait(paras []int, content *simple.Json) {
 	d.ChangeGait(paras[0])
 }
 
+func (d *Hexa) Circle(paras []int, content *simple.Json) {
+	log.Debug.Println("Circle")
+	d.ChangeGait(paras[0])
+}
+
 func (d *Hexa) Send(methodName string, args ...interface{}) interface{} {
 	return metago.CallFunc(d, methodName, args...)
 }
