@@ -14,9 +14,11 @@
                 item.appendChild(elem('input', { value: value }));
             }
             if (Array.isArray(content)) {
-                item.appendChild(elem('div', { 'class': 'container' }, content.map(function (block) {
-                    return createBlock.apply(null, [block.cmd, block.params[0], block.contents]);
-                })));
+                if (content.length > 0) {
+                    item.appendChild(elem('div', { 'class': 'block-container' }, content.map(function (block) {
+                        return createBlock.apply(null, [block.cmd, block.params[0], block.contents]);
+                    })));
+                }
             }
         } else if (typeof content === 'string') {
             item.appendChild(document.createTextNode(' ' + content));
@@ -25,7 +27,7 @@
     }
 
     function blockContents(block) {
-        var container = block.querySelector('.container');
+        var container = block.querySelector('.block-container');
         return container ? [].slice.call(container.children) : null;
     }
 

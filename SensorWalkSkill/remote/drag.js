@@ -48,7 +48,7 @@
         if (!matches(event.target, '.menu, .menu *, .script, .script *')) {
             return;
         }
-        var dropTarget = closest(event.target, '.script .container, .script .block, .menu, .script');
+        var dropTarget = closest(event.target, '.script .block-container, .script .block, .menu, .script');
         var dropType = 'script';
         if (matches(dropTarget, '.menu')) { dropType = 'menu'; }
         if (event.stopPropagation) {
