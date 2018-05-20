@@ -7,7 +7,7 @@ html, body {
 }
 
 .menu, .script, .block {
-    border: 1px inset #021429;
+    border: 0px inset #021429;
     border-radius: 7px;
 }
 
@@ -115,7 +115,7 @@ h1 {
 .block-container {
     margin: 0 -6px 0 20px;
     padding-bottom: 10px;
-    border: 1px inset #021429;
+    border: 1px inset white;
     border-radius: 7px;
     border-right: 0;
     background-color: rgb(246, 246, 246);
