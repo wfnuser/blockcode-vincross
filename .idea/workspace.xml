@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0bee9436-7fe8-4c92-848a-282ffa9dc58b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/SensorWalkSkill/remote/explore.html" afterPath="$PROJECT_DIR$/SensorWalkSkill/remote/explore.html" />
-      <change beforePath="$PROJECT_DIR$/SensorWalkSkill/remote/index.html" afterPath="$PROJECT_DIR$/SensorWalkSkill/remote/index.html" />
+      <change beforePath="$PROJECT_DIR$/SensorWalkSkill/remote/block.css" afterPath="$PROJECT_DIR$/SensorWalkSkill/remote/block.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,18 +20,8 @@
       <file leaf-file-name="explore.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/explore.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="block.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/block.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="25" column="22" lean-forward="false" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+            <state relative-caret-position="27">
+              <caret line="34" column="22" lean-forward="true" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -197,7 +186,8 @@
       <workItem from="1526711912497" duration="27151000" />
       <workItem from="1526787749561" duration="900000" />
       <workItem from="1526790785114" duration="3222000" />
-      <workItem from="1526794660267" duration="25000" />
+      <workItem from="1526794660267" duration="78000" />
+      <workItem from="1526795028950" duration="116000" />
     </task>
     <task id="LOCAL-00001" summary="a little change">
       <created>1526727054353</created>
@@ -234,11 +224,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526794447315</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="change nav">
+      <created>1526794711990</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1526794711990</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31298000" />
+    <option name="totallyTimeSpent" value="31467000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -299,13 +296,42 @@
     <MESSAGE value="a little change" />
     <MESSAGE value="change color" />
     <MESSAGE value="Change Color Style" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change Color Style" />
+    <MESSAGE value="change nav" />
+    <option name="LAST_COMMIT_MESSAGE" value="change nav" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/explore.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/block.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="25" column="22" lean-forward="false" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/explore.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -421,22 +447,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SensorWalkSkill/robot/src/dance.go" />
-    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/block.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="25" column="22" lean-forward="false" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/explore.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
@@ -446,6 +456,22 @@
             <element signature="n#style#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/block.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SensorWalkSkill/remote/explore.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="34" column="22" lean-forward="true" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

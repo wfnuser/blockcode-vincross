@@ -31,9 +31,6 @@ h1 {
     overflow-y: auto;
 }
 
-.menu.over {
-    background-color: BurlyWood;
-}
 
 .script-column {
     width: 24%;
@@ -60,9 +57,6 @@ h1 {
     overflow-y: auto;
 }
 
-.script.over {
-    background-color: CadetBlue;
-}
 
 .canvas-column {
     width: 46%;
@@ -130,8 +124,4 @@ h1 {
 
 .menu .block-container {
     background-color: #f8f9ee;
-}
-
-.over .block-container {
-    background-color: CadetBlue;
 }
