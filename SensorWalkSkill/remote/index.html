@@ -44,6 +44,8 @@
             <button class="btn waves-effect waves-light run-action" id="run-action">Run
                 <i class="material-icons right">send</i>
             </button>
+            <br/>
+            <img id="img" alt="img" src="a" />
         </div>
 
     </div>
@@ -70,7 +72,10 @@
             callback: function (robot) {
                 var skillID = "SensorWalkSkill";
                 robot.connectSkill({
-                    skillID: skillID
+                    skillID: skillID,
+					callback: robot.onRecvSkillData(function(skillID, data) {
+						document.getElementById('img').setAttribute( 'src', 'data:image/png;base64,'+data);
+					})
                 });
                 document.getElementById("run-action").onclick = function () {
                     console.log(global.file.scriptToJson())
