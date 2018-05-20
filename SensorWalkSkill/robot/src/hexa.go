@@ -102,10 +102,11 @@ func (d *Hexa) ChangeGait(info int) {
 }
 
 func (d *Hexa) circle(info int) {
+	var leg *hexabody.LegPosition
 	if info == 1 {
-		leg := hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)
+		leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)
 	} else {
-		leg := hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)		
+		leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)		
 	}
 	for j := 0; j < 20; j++ {
 		for i := 1; i < 6; i++ {
