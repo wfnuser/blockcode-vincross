@@ -26,7 +26,8 @@ h1 {
 }
 
 .menu {
-    background-color: PeachPuff;
+    /*background-color: PeachPuff;*/
+    background-color: #F5F6EB;
     overflow-y: auto;
 }
 
@@ -87,7 +88,8 @@ h1 {
 }
 
 .menu .block {
-    background-color: Coral;
+    /*background-color: Coral;*/
+    background-color: #C9CABB;
 }
 
 .script .block {
@@ -116,7 +118,8 @@ h1 {
 }
 
 .menu .block-container {
-    background-color: PeachPuff;
+    /*background-color: PeachPuff;*/
+    background-color: #F5F6EB;
 }
 
 .over .block-container {
