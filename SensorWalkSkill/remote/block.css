@@ -19,8 +19,11 @@ h1 {
     margin: 0em;
 }
 
+.pull-left {
+    float: left;
+}
+
 .menu-column {
-    width: 24%;
     height: 85%;
     float: left;
     margin-left: 10px;
@@ -31,18 +34,34 @@ h1 {
     overflow-y: auto;
 }
 
+.menu-column-mobile {
+    height: 50px!important;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+
+.menu-mobile {
+    overflow-y: hidden!important;
+    overflow-x: scroll!important;
+    white-space: nowrap;
+}
+
+.menu-mobile .block {
+    display: inline-block;
+}
+
 
 .script-column {
-    width: 24%;
     height: 85%;
-    float: left;
     margin: 0 10px;
 }
 
 .panel-column {
-    width: 45%;
-    float:left;
     height: 85%;
+}
+
+.panel-column-mobile {
+    height: 50px!important;
 }
 
 .panel-column img{

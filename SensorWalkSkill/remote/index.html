@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spider-2</title>
     <link href="block.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 </head>
@@ -27,14 +27,8 @@
             </div>
         </nav>
     </div>
-    <div style="margin-top: 40px; height:100%;">
-        <div class="menu-column">
-            <div class="menu"></div>
-        </div>
-        <div class="script-column">
-            <div class="script"></div>
-        </div>
-        <div class="panel-column">
+    <div style="margin-top: 40px; height:100%;" class="row">
+        <div class="col s12 l5 panel-column">
             <button class="btn waves-effect waves-light clear-action">Clear
             </button>
             <button class="btn waves-effect waves-light save-action">Save
@@ -47,19 +41,206 @@
             <br/>
             <img id="img" alt="img" src="a" />
         </div>
+        <div class="col s12 l3 menu-column">
+            <div class="menu"></div>
+        </div>
+        <div class="col s12 l3 script-column">
+            <div class="script"></div>
+        </div>
 
     </div>
 </body>
 
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="http://timruffles.github.io/mobile-drag-drop/release/index.min.js"></script>
+<script src="http://timruffles.github.io/mobile-drag-drop/release/scroll-behaviour.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    MobileDragDrop.polyfill({
+        // use this to make use of the scroll behaviour
+        dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+    });
+</script>
 <script src="util.js" type="text/javascript"></script>
-<script src="drag.js" type="text/javascript"></script>
+<!-- <script src="drag.js" type="text/javascript"></script> -->
+<script>
+
+    $(function () {
+
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+        var sideBarWidth = windowWidth * 0.8;
+
+        if (windowWidth < 600) {
+            $("#img").hide()
+            $(".menu-column").addClass('menu-column-mobile')
+            $(".menu").addClass('menu-mobile')
+            $(".panel-column").addClass('panel-column-mobile')
+        }
+
+    })
+</script>
+<script>
+        /**
+         * Created by zouxuan on 4/27/17.
+         */
+
+        (function (global) {
+            'use strict';
+
+            var dragTarget = null;
+            var dragType = null;
+            var scriptBlocks = [];
+
+            // work-around
+            var touchDragEnterEvent = {};
+
+            // work-around
+            function handleTouchLeave(event) {
+                if (touchDragEnterEvent.target.classList[0] === "block-container") {
+                    drop(touchDragEnterEvent);
+                }
+            }
+
+            function dragStart(event) {
+                console.log('dragStart', event);
+                // work-around
+                touchDragEnterEvent = {};
+
+                if (!matches(event.target, '.block')) {
+                    return;
+                }
+                if (matches(event.target, '.menu .block')) {
+                    dragType = 'menu';
+                } else {
+                    dragType = 'script';
+                }
+                event.target.classList.add('dragging');
+                dragTarget = event.target;
+                scriptBlocks = [].slice.call(
+                    document.querySelectorAll('.script .block:not(.dragging)')
+                );
+                event.dataTransfer.setData('text/html', event.target.outerHTML);
+                if (matches(event.target, '.menu .block')) {
+                    event.dataTransfer.effectAllowed = 'copy';
+                } else {
+                    event.dataTransfer.effectAllowed = 'move';
+                }
+            }
+
+            function dragOver(event) {
+                console.log('dragOver', event);
+
+                if (
+                    !matches(event.target, '.menu, .menu *, .script, .script *, .content')
+                ) {
+                    return;
+                }
+                if (event.preventDefault) {
+                    event.preventDefault();
+                }
+                if (dragType === 'menu') {
+                    event.dataTransfer.dropEffect = 'copy';
+                } else {
+                    event.dataTransfer.dropEffect = 'move';
+                }
+                return false;
+            }
+
+            function drop(event) {
+                console.log('drop', event);
+                console.log('drop', event.target);
+
+                if (!matches(event.target, '.menu, .menu *, .script, .script *')) {
+                    return;
+                }
+                var dropTarget = closest(
+                    event.target,
+                    '.script .block-container, .script .block, .menu, .script'
+                );
+                var dropType = 'script';
+                if (matches(dropTarget, '.menu')) {
+                    dropType = 'menu';
+                }
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                }
+                if (dragType === 'script' && dropType === 'menu') {
+                    trigger('blockRemoved', dragTarget.parentElement, dragTarget);
+                    dragTarget.parentElement.removeChild(dragTarget);
+                } else if (dragType === 'script' && dropType === 'script') {
+                    if (matches(dropTarget, '.block')) {
+                        dropTarget.parentElement.insertBefore(
+                            dragTarget,
+                            dropTarget.nextSibling
+                        );
+                    } else {
+                        dropTarget.insertBefore(dragTarget, dropTarget.firstChildElement);
+                    }
+                    trigger('blockMoved', dropTarget, dragTarget);
+                } else if (dragType === 'menu' && dropType === 'script') {
+                    var newNode = dragTarget.cloneNode(true);
+                    newNode.classList.remove('dragging');
+                    if (matches(dropTarget, '.block')) {
+                        dropTarget.parentElement.insertBefore(newNode, dropTarget.nextSibling);
+                    } else {
+                        dropTarget.insertBefore(newNode, dropTarget.firstChildElement);
+                    }
+                    trigger('blockAdded', dropTarget, newNode);
+                }
+            }
+
+            function dragEnter(event) {
+                console.log('dragEnter', event);
+                touchDragEnterEvent = event
+
+                if (matches(event.target, '.menu, .script, .content')) {
+                    event.target.classList.add('over');
+                    if (event.preventDefault) {
+                        event.preventDefault();
+                    } // Necessary. Allows us to drop.
+                } else {
+                    if (!matches(event.target, '.menu *, .script *')) {
+                        _findAndRemoveClass('over');
+                        event.target.classList.remove('over');
+                    }
+                }
+                return false;
+            }
+
+            function _findAndRemoveClass(klass) {
+                var elem = document.querySelector('.' + klass);
+                if (elem) {
+                    elem.classList.remove(klass);
+                }
+            }
+
+            function dragEnd(event) {
+                _findAndRemoveClass('dragging');
+                _findAndRemoveClass('over');
+                _findAndRemoveClass('next');
+            }
+
+            // document.addEventListener("touchstart", handleDrag, false);
+            // document.addEventListener("touchend", handleEnd, false);
+            // document.addEventListener("touchcancel", handleCancel, false);
+            document.addEventListener('touchend', handleTouchLeave, false);
+
+            document.addEventListener('dragstart', dragStart, false);
+            document.addEventListener('dragenter', dragEnter, false);
+            document.addEventListener('dragover', dragOver, false);
+            document.addEventListener('drag', function () { }, false);
+            document.addEventListener('drop', drop, false);
+            document.addEventListener('dragend', dragEnd, false);
+        })(window);
+
+</script>
 <script src="file.js" type="text/javascript"></script>
 <script src="block.js" type="text/javascript"></script>
 <script src="menu.js" type="text/javascript"></script>
 <script src="turtle.js" type="text/javascript"></script>
 <script type="text/javascript" src="mind-framework.js"></script>
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 <script type="text/javascript">
     (function (global) {
         'use strict';
@@ -73,9 +254,9 @@
                 var skillID = "SensorWalkSkill";
                 robot.connectSkill({
                     skillID: skillID,
-					callback: robot.onRecvSkillData(function(skillID, data) {
-						document.getElementById('img').setAttribute( 'src', 'data:image/png;base64,'+data);
-					})
+                    callback: robot.onRecvSkillData(function (skillID, data) {
+                        document.getElementById('img').setAttribute('src', 'data:image/png;base64,' + data);
+                    })
                 });
                 document.getElementById("run-action").onclick = function () {
                     console.log(global.file.scriptToJson())
@@ -88,6 +269,10 @@
             }
         });
     })(window);
+
+    $('.block').on('dragenter', '.menu', function (event) {
+        console.log('jquery touch enter')
+    })
 
 
 </script>
