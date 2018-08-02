@@ -14,48 +14,40 @@
 <body>
     <div class="navbar-fixed">
         <nav style="background-color: rgba(52,53,44,0.8)">
-            <div class="nav-wrapper" style="width:95%;margin-left:2.5%;">
-                <a href="#" class="brand-logo">Spider-2</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <a href="explore.html">探索</a>
-                    </li>
-                    <li>
-                        <a href="index.html">编程</a>
-                    </li>
-                </ul>
+            <div class="nav-wrapper" style="width:95%;margin-left:2.5%;margin-bottom:0px;">
+
+                <a href="#" class="brand center">
+                    <div class="run-action action" id="run-action">
+                        <i class="material-icons run-icon action-icon">play_arrow</i>
+                        </i>
+                        <div>run</div>
+                    </div>
+                    <div class="stop-action action" id="stop-action">
+                        <i class="material-icons stop-icon action-icon">stop</i>
+                        </i>
+                        <div>stop</div>
+                    </div>
+                </a>
+
             </div>
         </nav>
     </div>
-    <div style="margin-top: 40px; height:100%;" class="row">
-        <div class="col s12 l5 panel-column">
-            <button class="btn waves-effect waves-light clear-action">Clear
-            </button>
-            <button class="btn waves-effect waves-light save-action">Save
-            </button>
-            <button class="btn waves-effect waves-light load-action">Load
-            </button>
-            <button class="btn waves-effect waves-light run-action" id="run-action">Run
-                <i class="material-icons right">send</i>
-            </button>
-            <br/>
-            <img id="img" alt="img" src="a" />
+    <div id="coding-panel" class="row">
+        <div class="col s12 l3 script-column">
+            <div class="script"></div>
         </div>
         <div class="col s12 l3 menu-column">
             <div class="menu"></div>
-        </div>
-        <div class="col s12 l3 script-column">
-            <div class="script"></div>
         </div>
 
     </div>
 </body>
 
 <!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-<script src="http://timruffles.github.io/mobile-drag-drop/release/index.min.js"></script>
-<script src="http://timruffles.github.io/mobile-drag-drop/release/scroll-behaviour.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./assets/materialize.min.js"></script>
+<script src="./assets/index.min.js"></script>
+<script src="./assets/scroll-behaviour.min.js"></script>
+<script src="./assets/jquery.min.js"></script>
 <script>
     MobileDragDrop.polyfill({
         // use this to make use of the scroll behaviour
@@ -73,7 +65,7 @@
         var sideBarWidth = windowWidth * 0.8;
 
         if (windowWidth < 600) {
-            $("#img").hide()
+            // $("#img").hide()
             $(".menu-column").addClass('menu-column-mobile')
             $(".menu").addClass('menu-mobile')
             $(".panel-column").addClass('panel-column-mobile')
@@ -97,10 +89,13 @@
             var touchDragEnterEvent = {};
 
             // work-around
-            function handleTouchLeave(event) {
-                if (touchDragEnterEvent.target.classList[0] === "block-container") {
+            function handleTouchEnd(event) {
+                if (touchDragEnterEvent.target && touchDragEnterEvent.target.classList[0] === "block-container") {
                     drop(touchDragEnterEvent);
                 }
+            }
+            function handleTouchStart(event) {
+                touchDragEnterEvent = {}
             }
 
             function dragStart(event) {
@@ -222,10 +217,10 @@
                 _findAndRemoveClass('next');
             }
 
-            // document.addEventListener("touchstart", handleDrag, false);
+            document.addEventListener("touchstart", handleTouchStart, false);
             // document.addEventListener("touchend", handleEnd, false);
             // document.addEventListener("touchcancel", handleCancel, false);
-            document.addEventListener('touchend', handleTouchLeave, false);
+            document.addEventListener('touchend', handleTouchEnd, false);
 
             document.addEventListener('dragstart', dragStart, false);
             document.addEventListener('dragenter', dragEnter, false);
@@ -247,23 +242,35 @@
 
         document.getElementById("run-action").onclick = function () {
             console.log(global.file.scriptToJson())
+            document.getElementById("run-action").style.display = "none"
+            document.getElementById("stop-action").style.display = "block"
+        }
+
+        document.getElementById("stop-action").onclick = function () {
+            document.getElementById("stop-action").style.display = "none"
+            document.getElementById("run-action").style.display = "block"
         }
 
         mind.init({
             callback: function (robot) {
                 var skillID = "SensorWalkSkill";
-                robot.connectSkill({
-                    skillID: skillID,
-                    callback: robot.onRecvSkillData(function (skillID, data) {
-                        document.getElementById('img').setAttribute('src', 'data:image/png;base64,' + data);
-                    })
-                });
+                // robot.connectSkill({
+                //     skillID: skillID,
+                //     callback: robot.onRecvSkillData(function (skillID, data) {
+                //         document.getElementById('img').setAttribute('src', 'data:image/png;base64,' + data);
+                //     })
+                // });
                 document.getElementById("run-action").onclick = function () {
                     console.log(global.file.scriptToJson())
                     robot.sendData({
                         skillID: skillID,
-                        // data: "start",
                         data: global.file.scriptToJson(),
+                    })
+                }
+                document.getElementById("stop-action").onclick = function () {
+                    robot.sendData({
+                        skillID: skillID,
+                        data: "stop",
                     })
                 }
             }
