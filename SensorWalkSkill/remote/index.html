@@ -13,10 +13,10 @@
 
 <body>
     <div class="navbar-fixed">
-        <nav style="background-color: rgba(52,53,44,0.8)">
+        <nav style="background-color: #FFFFFF;" id="nav" class="nav">
             <div class="nav-wrapper" style="width:95%;margin-left:2.5%;margin-bottom:0px;">
 
-                <a href="#" class="brand center">
+                <a href="#" class="brand center" id="brand-action">
                     <div class="run-action action" id="run-action">
                         <i class="material-icons run-icon action-icon">play_arrow</i>
                         </i>
@@ -27,6 +27,11 @@
                         </i>
                         <div>stop</div>
                     </div>
+                </a>
+
+                <a href="#" class="brand center" id="brand-bin">
+                    <i class="material-icons delete">delete</i>
+                    </i>
                 </a>
 
             </div>
@@ -55,7 +60,6 @@
     });
 </script>
 <script src="util.js" type="text/javascript"></script>
-<!-- <script src="drag.js" type="text/javascript"></script> -->
 <script>
 
     $(function () {
@@ -90,7 +94,8 @@
 
             // work-around
             function handleTouchEnd(event) {
-                if (touchDragEnterEvent.target && touchDragEnterEvent.target.classList[0] === "block-container") {
+                console.log(touchDragEnterEvent.target)
+                if (touchDragEnterEvent.target && (touchDragEnterEvent.target.classList[0] === "block-container" || touchDragEnterEvent.target.classList[0] === "navbar-fixed" || touchDragEnterEvent.target.classList[1] === "delete" || touchDragEnterEvent.target.classList[0] === "nav")) {
                     drop(touchDragEnterEvent);
                 }
             }
@@ -100,6 +105,9 @@
 
             function dragStart(event) {
                 console.log('dragStart', event);
+                document.getElementById("brand-bin").style.display = "block"
+                document.getElementById("brand-action").style.display = "none"
+                document.getElementById("nav").style.backgroundColor = "#FFF1F3"
                 // work-around
                 touchDragEnterEvent = {};
 
@@ -125,8 +133,6 @@
             }
 
             function dragOver(event) {
-                console.log('dragOver', event);
-
                 if (
                     !matches(event.target, '.menu, .menu *, .script, .script *, .content')
                 ) {
@@ -146,22 +152,32 @@
             function drop(event) {
                 console.log('drop', event);
                 console.log('drop', event.target);
-
-                if (!matches(event.target, '.menu, .menu *, .script, .script *')) {
+                document.getElementById("brand-bin").style.display = "none"
+                document.getElementById("brand-action").style.display = "block"
+                document.getElementById("nav").style.backgroundColor = "#FFFFFF"
+                
+                if (!matches(event.target, '.menu, .menu *, .script, .script *, .navbar-fixed, .navbar-fixed *')) {
+                    console.log('dropTarget not matched!')
                     return;
                 }
                 var dropTarget = closest(
                     event.target,
-                    '.script .block-container, .script .block, .menu, .script'
+                    '.script .block-container, .script .block, .menu, .script, .navbar-fixed, .navbar-fixed *'
                 );
+                console.log("dropTarget", dropTarget)
                 var dropType = 'script';
+                console.log('dropTarget', dropTarget)
                 if (matches(dropTarget, '.menu')) {
                     dropType = 'menu';
                 }
+                if (matches(dropTarget, '.navbar-fixed, .navbar-fixed *')) {
+                    dropType = 'nav';
+                }
+                console.log('dropType', dropType)
                 if (event.stopPropagation) {
                     event.stopPropagation();
                 }
-                if (dragType === 'script' && dropType === 'menu') {
+                if (dragType === 'script' && (dropType === 'menu' || dropType === 'nav')) {
                     trigger('blockRemoved', dragTarget.parentElement, dragTarget);
                     dragTarget.parentElement.removeChild(dragTarget);
                 } else if (dragType === 'script' && dropType === 'script') {

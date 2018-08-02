@@ -7,8 +7,6 @@ body {
   background-color: rgb(239, 240, 220);
 }
 
-.menu,
-.script,
 .block {
   border: 0px inset #021429;
   border-radius: 7px;
@@ -27,6 +25,10 @@ h1 {
   margin: 0em;
 }
 
+#nav {
+  box-shadow: none !important;
+}
+
 .pull-left {
   float: left;
 }
@@ -35,19 +37,19 @@ h1 {
   height: 85%;
   float: left;
   margin-left: 10px;
+  padding: 0px !important;
 }
 
 .menu {
-  background-color: #f5f6eb;
+  background: #aed97b36;
   overflow-y: auto;
 }
 
 .menu-column-mobile {
-  height: 50px !important;
+  height: 111px !important;
   margin-left: 10px;
-  margin-bottom: 30px;
   position: fixed;
-  bottom: 50px;
+  bottom: 0px;
 }
 
 .menu-mobile {
@@ -62,9 +64,11 @@ h1 {
 }
 
 .script-column {
-  margin-top: 10px !important;
-  padding-bottom: 110px !important;
+  margin-top: 0px !important;
+  padding-bottom: 71px !important;
   height: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 .panel-column {
@@ -81,7 +85,7 @@ h1 {
 }
 
 .script {
-  background-color: rgb(246, 246, 246);
+  background-color: #fff;
   height: 100%;
   overflow-y: auto;
   padding: 20px;
@@ -123,12 +127,14 @@ h1 {
 }
 
 .menu .block {
-  background-color: #c9cabb;
+  background: #aed97b;
+  border: 1px solid #a5c57f;
 }
 
 .script .block {
   margin: 10px 5px 10px 5px;
-  background-color: rgba(109, 211, 206, 0.8);
+  background: #aed97b;
+  border: 1px solid #a5c57f;
 }
 
 .block input {
@@ -144,15 +150,14 @@ h1 {
 .block-container {
   margin: 0 -6px 0 20px;
   padding-bottom: 10px;
-  border: 1px inset white;
-  border-radius: 7px;
+  padding-top: 5px;
   border-right: 0;
-  background-color: rgb(246, 246, 246);
+  background: #fff;
   border-radius: 7px 0 0 7px;
 }
 
 .menu .block-container {
-  background-color: #f8f9ee;
+  background: #e0ebc7;
 }
 
 .action {
@@ -167,7 +172,7 @@ h1 {
   margin-left: -36px;
 }
 .action div {
-    line-height: 32px;
+  line-height: 32px;
 }
 
 .run-action {
@@ -191,7 +196,7 @@ h1 {
   background: #89f4dd;
 }
 .stop-icon {
-  background: #FFDFE2;
+  background: #ffdfe2;
 }
 
 #coding-panel {
@@ -200,4 +205,11 @@ h1 {
   margin-bottom: 0px;
   position: fixed;
   padding-bottom: 96px;
+}
+
+#brand-bin {
+  display: none;
+}
+.delete {
+  color: #e14c58;
 }
