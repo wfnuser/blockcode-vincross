@@ -23,6 +23,8 @@ import (
 	"mind/core/framework/skill"
 )
 
+var stop bool
+
 const (
 	TIME_TO_NEXT_REACTION = 2000 // milliseconds
 	DISTANCE_TO_REACTION  = 250  // millimeters
@@ -106,17 +108,17 @@ func (d *Hexa) circle(info int) {
 	if info == 1 {
 		leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)
 	} else {
-		leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)		
+		leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)
 	}
 	for j := 0; j < 20; j++ {
 		for i := 1; i < 6; i++ {
 			hexabody.MoveLeg(i, leg, FAST_DURATION*3)
 		}
-		if (j % 2 == 0) {
+		if j%2 == 0 {
 			leg = hexabody.NewLegPosition().SetCoordinates(0, 0, 70.0)
 		} else {
 			if info == 1 {
-				leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)			
+				leg = hexabody.NewLegPosition().SetCoordinates(-100, 50.0, 70.0)
 			} else {
 				leg = hexabody.NewLegPosition().SetCoordinates(100, 50.0, 70.0)
 			}
@@ -148,6 +150,7 @@ func (d *Hexa) walk() {
 }
 
 func (d *Hexa) OnStart() {
+	stop = false
 	err := hexabody.Start()
 	if err != nil {
 		log.Error.Println("Hexabody start err:", err)
@@ -199,6 +202,9 @@ func (d *Hexa) OnDisconnect() {
 }
 
 func (d *Hexa) OnRecvString(data string) {
+	if data == "stop" {
+		stop = true
+	}
 	d.direction = hexabody.Direction()
 	b := []byte(data)
 	err := d.Parse(b)

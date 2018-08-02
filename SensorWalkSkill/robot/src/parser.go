@@ -21,6 +21,10 @@ func (d *Hexa) ParseJson(js *simple.Json) error {
 		return err
 	}
 	for i, _ := range cmds {
+		if stop == false {
+			stop = true
+			break
+		}
 		cmd := js.GetIndex(i)
 		name, err := cmd.Get("cmd").String()
 		if err != nil {
