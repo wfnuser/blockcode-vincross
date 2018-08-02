@@ -155,7 +155,7 @@
                 document.getElementById("brand-bin").style.display = "none"
                 document.getElementById("brand-action").style.display = "block"
                 document.getElementById("nav").style.backgroundColor = "#FFFFFF"
-                
+
                 if (!matches(event.target, '.menu, .menu *, .script, .script *, .navbar-fixed, .navbar-fixed *')) {
                     console.log('dropTarget not matched!')
                     return;
@@ -259,12 +259,6 @@
         mind.init({
             callback: function (robot) {
                 var skillID = "SensorWalkSkill";
-                // robot.connectSkill({
-                //     skillID: skillID,
-                //     callback: robot.onRecvSkillData(function (skillID, data) {
-                //         document.getElementById('img').setAttribute('src', 'data:image/png;base64,' + data);
-                //     })
-                // });
                 document.getElementById("run-action").onclick = function () {
                     console.log(global.file.scriptToJson())
                     robot.sendData({

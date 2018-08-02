@@ -1,12 +1,14 @@
-package Hexa
+package xereb
 
 import (
+	"mind/core/framework/drivers/xerebody"
 	"mind/core/framework/log"
+	"time"
 
 	simple "github.com/bitly/go-simplejson"
 )
 
-func (d *Hexa) Parse(b []byte) error {
+func (d *xereb) Parse(b []byte) error {
 	js, err := simple.NewJson(b)
 	log.Debug.Println("Parse")
 	if err != nil {
@@ -15,7 +17,7 @@ func (d *Hexa) Parse(b []byte) error {
 	return d.ParseJson(js)
 }
 
-func (d *Hexa) ParseJson(js *simple.Json) error {
+func (d *xereb) ParseJson(js *simple.Json) error {
 	cmds, err := js.Array()
 	if err != nil {
 		return err
@@ -43,6 +45,8 @@ func (d *Hexa) ParseJson(js *simple.Json) error {
 		}
 		content := cmd.Get("contents")
 		d.Send(name, intParas, content)
+		time.Sleep(time.Second)
 	}
+	xerebody.Move(0, 0)
 	return nil
 }
