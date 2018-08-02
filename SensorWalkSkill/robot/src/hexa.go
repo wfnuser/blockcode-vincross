@@ -9,13 +9,10 @@
 package Hexa
 
 import (
-	"bytes"
-	"encoding/base64"
-	"image/jpeg"
 	"math"
 	"os"
 	// "time"
-	"mind/core/framework"
+
 	"mind/core/framework/drivers/distance"
 	"mind/core/framework/drivers/hexabody"
 	"mind/core/framework/drivers/media"
@@ -179,17 +176,6 @@ func (d *Hexa) OnConnect() {
 		log.Error.Println("Media start err:", err)
 		return
 	}
-	for {
-		log.Info.Println("Connected")
-		buf := new(bytes.Buffer)
-		log.Info.Println("JPEG")
-		jpeg.Encode(buf, media.SnapshotYCbCr(), nil)
-		log.Info.Println("BASE64")
-		str := base64.StdEncoding.EncodeToString(buf.Bytes())
-		log.Info.Println("SENDING")
-		framework.SendString(str)
-		log.Info.Println("Sent:", str[:20], len(str))
-	}
 }
 
 func (d *Hexa) OnClose() {
@@ -203,7 +189,11 @@ func (d *Hexa) OnDisconnect() {
 
 func (d *Hexa) OnRecvString(data string) {
 	if data == "stop" {
+		log.Info.Println("Receive stop!")
 		stop = true
+		return
+	} else {
+		stop = false
 	}
 	d.direction = hexabody.Direction()
 	b := []byte(data)
@@ -223,5 +213,5 @@ func (d *Hexa) OnRecvString(data string) {
 	// 	log.Debug.Println(d.getAverageRGB())
 	// 	time.Sleep(SENSE_INTERVAL * time.Millisecond)
 	// }
-	log.Debug.Println(data)
+	log.Info.Println(data)
 }

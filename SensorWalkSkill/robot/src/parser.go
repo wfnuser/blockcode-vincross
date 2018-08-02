@@ -21,8 +21,7 @@ func (d *Hexa) ParseJson(js *simple.Json) error {
 		return err
 	}
 	for i, _ := range cmds {
-		if stop == false {
-			stop = true
+		if stop == true {
 			break
 		}
 		cmd := js.GetIndex(i)

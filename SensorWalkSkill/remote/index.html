@@ -240,17 +240,6 @@
     (function (global) {
         'use strict';
 
-        document.getElementById("run-action").onclick = function () {
-            console.log(global.file.scriptToJson())
-            document.getElementById("run-action").style.display = "none"
-            document.getElementById("stop-action").style.display = "block"
-        }
-
-        document.getElementById("stop-action").onclick = function () {
-            document.getElementById("stop-action").style.display = "none"
-            document.getElementById("run-action").style.display = "block"
-        }
-
         mind.init({
             callback: function (robot) {
                 var skillID = "SensorWalkSkill";
@@ -266,12 +255,16 @@
                         skillID: skillID,
                         data: global.file.scriptToJson(),
                     })
+                    document.getElementById("run-action").style.display = "none"
+                    document.getElementById("stop-action").style.display = "block"
                 }
                 document.getElementById("stop-action").onclick = function () {
                     robot.sendData({
                         skillID: skillID,
                         data: "stop",
                     })
+                    document.getElementById("stop-action").style.display = "none"
+                    document.getElementById("run-action").style.display = "block"
                 }
             }
         });
